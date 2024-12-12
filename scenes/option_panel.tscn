@@ -1,0 +1,96 @@
+[gd_scene load_steps=4 format=3 uid="uid://mx0kpqtkjh3g"]
+
+[ext_resource type="Script" path="res://scenes/option_panel.gd" id="1_njq6a"]
+[ext_resource type="FontFile" uid="uid://tcqb2qvfwphq" path="res://assets/SpaceGrotesk-VariableFont_wght.ttf" id="2_fnxmf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gxet"]
+
+[node name="OptionPanel" type="PanelContainer"]
+self_modulate = Color(0.404511, 0.404511, 0.404511, 1)
+offset_left = 21.0
+offset_top = 70.0
+offset_right = 920.0
+offset_bottom = 558.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1gxet")
+script = ExtResource("1_njq6a")
+
+[node name="Close_button" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_fnxmf")
+theme_override_font_sizes/font_size = 28
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_fnxmf")
+theme_override_font_sizes/font_size = 28
+text = "Options"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="MasterVolume" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 0.5
+value = 100.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MusicVolume" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+rounded = true
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fnxmf")
+theme_override_font_sizes/font_size = 32
+text = "Under Construction"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer2/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

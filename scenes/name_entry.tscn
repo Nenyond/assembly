@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm5yaahqoi0s8"]
+
+[ext_resource type="Script" path="res://scenes/name_entry.gd" id="1_wp0ok"]
+[ext_resource type="FontFile" uid="uid://c0xdodwiytkg4" path="res://assets/Doto-VariableFont_ROND,wght.ttf" id="2_u3fg4"]
+[ext_resource type="Script" path="res://scenes/name_edit.gd" id="3_j1o3r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nal8i"]
+
+[node name="NameEntry" type="PanelContainer"]
+self_modulate = Color(1.92523e-06, 0.662728, 0, 1)
+custom_minimum_size = Vector2(400, 100)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_nal8i")
+script = ExtResource("1_wp0ok")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_u3fg4")
+theme_override_font_sizes/font_size = 24
+text = "Please Enter A Name"
+horizontal_alignment = 1
+
+[node name="nameEdit" type="LineEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_u3fg4")
+theme_override_font_sizes/font_size = 20
+script = ExtResource("3_j1o3r")
+
+[node name="Label2" type="Label" parent="."]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_u3fg4")
+theme_override_font_sizes/font_size = 20
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[connection signal="text_submitted" from="nameEdit" to="." method="_on_name_edit_text_submitted"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

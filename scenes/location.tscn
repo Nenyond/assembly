@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://di75fcpfcbhpa"]
+
+[ext_resource type="Script" path="res://scenes/location.gd" id="1_rc1m7"]
+
+[node name="Location" type="PanelContainer"]
+custom_minimum_size = Vector2(250, 500)
+offset_left = 1516.0
+offset_top = 53.0
+offset_right = 1556.0
+offset_bottom = 93.0
+script = ExtResource("1_rc1m7")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LocName" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Location Name"
+horizontal_alignment = 1
+
+[node name="LocDescrip" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 475)
+layout_mode = 2
+text = "Location Description will be located in this window."

@@ -1,0 +1,187 @@
+[gd_scene load_steps=12 format=3 uid="uid://dfuyw3k4eqgtr"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_7nlyx"]
+[ext_resource type="PackedScene" uid="uid://c4omtkbnwtd3f" path="res://scenes/player_panel.tscn" id="2_6tjrd"]
+[ext_resource type="Texture2D" uid="uid://cuml0lf5ddgqr" path="res://assets/background.png" id="2_07slj"]
+[ext_resource type="PackedScene" uid="uid://di75fcpfcbhpa" path="res://scenes/location.tscn" id="2_fpd5w"]
+[ext_resource type="Script" path="res://scenes/location_manager.gd" id="2_kgkli"]
+[ext_resource type="Script" path="res://scenes/text_parser.gd" id="2_oedvs"]
+[ext_resource type="Script" path="res://scripts/input.gd" id="3_y73wb"]
+[ext_resource type="PackedScene" uid="uid://mx0kpqtkjh3g" path="res://scenes/option_panel.tscn" id="8_pntcu"]
+[ext_resource type="PackedScene" uid="uid://d0abka8fvcbg5" path="res://scenes/terminal_panel.tscn" id="9_77rlo"]
+[ext_resource type="PackedScene" uid="uid://bm5yaahqoi0s8" path="res://scenes/name_entry.tscn" id="10_0kr0d"]
+[ext_resource type="AudioStream" uid="uid://d2efnxrb7erte" path="res://assets/dark fallout.ogg" id="11_2c47u"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7nlyx")
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_2c47u")
+volume_db = -10.0
+autoplay = true
+playback_type = 1
+parameters/looping = true
+
+[node name="LocationManager" type="Node" parent="."]
+script = ExtResource("2_kgkli")
+
+[node name="StartingLocation" parent="LocationManager" instance=ExtResource("2_fpd5w")]
+offset_left = 2075.0
+offset_top = 54.0
+offset_right = 2325.0
+offset_bottom = 570.0
+location_name = "A TABLE in a workshop"
+location_description = "You awake on a slab table. nearby is a work BENCH, some MACHINERY, and a LOCKER. You can LOOK, INTERACT, or ask for HELP. Build a body to be able to leave the Workshop."
+
+[node name="Bench" parent="LocationManager" instance=ExtResource("2_fpd5w")]
+offset_left = 1798.0
+offset_top = 52.0
+offset_right = 2048.0
+offset_bottom = 568.0
+location_name = "A cluttered workbench."
+location_description = "A workbench that is cluttered with TOOLS and PARTS. A TERMINAL is present, its cursor blinking steadily. "
+
+[node name="Locker" parent="LocationManager" instance=ExtResource("2_fpd5w")]
+offset_right = 1766.0
+offset_bottom = 569.0
+location_name = "A machinists locker"
+location_description = "This locker is clad in grating, and is filled with PARTS and robot LIMBS. "
+
+[node name="Machinery" parent="LocationManager" instance=ExtResource("2_fpd5w")]
+offset_left = 1225.0
+offset_top = 50.0
+offset_right = 1475.0
+offset_bottom = 566.0
+location_name = "Various machinery"
+location_description = "The machinery is complicated and includes a variety of MANIPULATORS and a CRANE that can reach everywhere in the workshop."
+
+[node name="WorkshopDoor" parent="LocationManager" instance=ExtResource("2_fpd5w")]
+offset_left = 2075.0
+offset_top = 54.0
+offset_right = 2325.0
+offset_bottom = 570.0
+location_name = "A DOOR out of the Workshop."
+location_description = "This DOOR leads out of the Workshop and to a wider world of adventure. Build yourself a body so you can explore the world."
+
+[node name="TextParser" type="Node" parent="."]
+script = ExtResource("2_oedvs")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_07slj")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Panel" type="Panel" parent="TextureRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TextureRect/MarginContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 28
+text = "Assembly"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="game_output" type="PanelContainer" parent="TextureRect/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.721569)
+custom_minimum_size = Vector2(0, 490)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/MarginContainer/VBoxContainer/game_output"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect/MarginContainer/VBoxContainer/game_output/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer/game_output/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="player_input" type="PanelContainer" parent="TextureRect/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.721569)
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer/player_input"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="TextureRect/MarginContainer/VBoxContainer/player_input/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TextureRect/MarginContainer/VBoxContainer/player_input/HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 28
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="input" type="LineEdit" parent="TextureRect/MarginContainer/VBoxContainer/player_input/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+max_length = 48
+script = ExtResource("3_y73wb")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerPanel" parent="CanvasLayer" instance=ExtResource("2_6tjrd")]
+visible = false
+
+[node name="OptionPanel" parent="CanvasLayer" instance=ExtResource("8_pntcu")]
+visible = false
+
+[node name="TerminalPanel" parent="CanvasLayer" instance=ExtResource("9_77rlo")]
+offset_left = 9.0
+offset_top = 73.0
+offset_right = 934.0
+offset_bottom = 523.0
+
+[node name="NameEntry" parent="CanvasLayer/TerminalPanel" instance=ExtResource("10_0kr0d")]
+layout_mode = 2
+
+[connection signal="text_submitted" from="TextureRect/MarginContainer/VBoxContainer/player_input/HBoxContainer/input" to="." method="_on_line_edit_text_submitted"]

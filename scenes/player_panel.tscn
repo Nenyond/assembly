@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4omtkbnwtd3f"]
+
+[ext_resource type="Script" path="res://scenes/player_panel.gd" id="1_7ap8l"]
+[ext_resource type="FontFile" uid="uid://tcqb2qvfwphq" path="res://assets/SpaceGrotesk-VariableFont_wght.ttf" id="2_2fbyd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v26xj"]
+
+[node name="PlayerPanel" type="MarginContainer"]
+offset_left = 600.0
+offset_top = 75.0
+offset_right = 900.0
+offset_bottom = 550.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("1_7ap8l")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(0.404511, 0.404511, 0.404511, 1)
+z_index = 1
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v26xj")
+
+[node name="close_label" type="Label" parent="PanelContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_2fbyd")
+theme_override_font_sizes/font_size = 24
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_2fbyd")
+theme_override_font_sizes/font_size = 24
+text = "Player panel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 425)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="NameLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2fbyd")
+theme_override_font_sizes/font_size = 20
+text = "Your Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerName" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_2fbyd")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

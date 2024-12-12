@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dktvdoccrgjca"]
+
+[ext_resource type="Script" path="res://scenes/game_display.gd" id="1_g8pma"]
+[ext_resource type="PackedScene" uid="uid://yc1sxjlb11pn" path="res://scenes/response.tscn" id="2_wj6jf"]
+
+[node name="game_display" type="VBoxContainer"]
+theme_override_constants/separation = -5
+script = ExtResource("1_g8pma")
+
+[node name="history" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.780702, 0.780702, 0.780702, 1)
+theme_override_font_sizes/font_size = 24
+text = "Player input history"
+
+[node name="response" parent="." instance=ExtResource("2_wj6jf")]
+layout_mode = 2

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://yc1sxjlb11pn"]
+
+[node name="response" type="Label"]
+custom_minimum_size = Vector2(900, 0)
+theme_override_font_sizes/font_size = 28
+text = "Game output responses
+"
+autowrap_mode = 2

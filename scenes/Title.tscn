@@ -1,0 +1,115 @@
+[gd_scene load_steps=5 format=3 uid="uid://c28mjikbvkl0n"]
+
+[ext_resource type="Script" path="res://scenes/title.gd" id="1_1fn8k"]
+[ext_resource type="Texture2D" uid="uid://cuml0lf5ddgqr" path="res://assets/background.png" id="1_he2yi"]
+[ext_resource type="FontFile" uid="uid://c0xdodwiytkg4" path="res://assets/Doto-VariableFont_ROND,wght.ttf" id="2_evige"]
+[ext_resource type="Script" path="res://title_cursor.gd" id="3_62veh"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1fn8k")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_he2yi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TitleWord" type="Label" parent="CanvasLayer"]
+offset_left = 393.0
+offset_top = 45.0
+offset_right = 547.0
+offset_bottom = 84.0
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("2_evige")
+theme_override_font_sizes/font_size = 32
+text = "Assembly"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleCursor" type="Label" parent="CanvasLayer"]
+offset_left = 550.0
+offset_top = 45.0
+offset_right = 569.0
+offset_bottom = 84.0
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_evige")
+theme_override_font_sizes/font_size = 32
+text = "_"
+script = ExtResource("3_62veh")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 550)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Assembly_  is a text based adventure demo built for the Godot Jam #3. It is an hoamge to the many hours I spent playing classic text based games like Zork. "
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "In this short demo version of what will be a more fleshed out game, you are a robot that wakes up on a workbench, and must use the world around you to build yourself a robot body. "
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "You'll enter commands in the text input area at the bottom, and the game engine will parse those commands (and parameters) to describe the location and things you see via text. "
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start Game"
+
+[node name="CreditsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "View Credits"
+
+[node name="GitHubButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "View Code in Github"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/GitHubButton" to="." method="_on_git_hub_button_pressed"]

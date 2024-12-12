@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dypnjfmvy7hvf"]
+
+[ext_resource type="Script" path="res://scenes/game_display.gd" id="1_36jet"]
+[ext_resource type="FontFile" uid="uid://c0xdodwiytkg4" path="res://assets/Doto-VariableFont_ROND,wght.ttf" id="2_crb77"]
+[ext_resource type="PackedScene" uid="uid://yc1sxjlb11pn" path="res://scenes/response.tscn" id="2_sgqh3"]
+
+[node name="game_display" type="VBoxContainer"]
+theme_override_constants/separation = -5
+script = ExtResource("1_36jet")
+
+[node name="history" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.780702, 0.780702, 0.780702, 1)
+theme_override_fonts/font = ExtResource("2_crb77")
+theme_override_font_sizes/font_size = 24
+text = "Player input history"
+
+[node name="response" parent="." instance=ExtResource("2_sgqh3")]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_crb77")
