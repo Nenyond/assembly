@@ -2,7 +2,7 @@ extends Control
 
 const response = preload("res://scenes/response.tscn")
 const GameDisplay = preload("res://scenes/game_display.tscn")
-@export var memory_lines:int = 2
+@export var memory_lines:int = 5
 
 @onready var parser = $TextParser
 @onready var game_area = $TextureRect/MarginContainer/VBoxContainer/game_output/MarginContainer/ScrollContainer/VBoxContainer
@@ -10,13 +10,17 @@ const GameDisplay = preload("res://scenes/game_display.tscn")
 @onready var scrollbar = scroll.get_v_scroll_bar()
 @onready var input = $TextureRect/MarginContainer/VBoxContainer/player_input/HBoxContainer/input
 @onready var location_manager = $LocationManager
+@onready var player = $Player
+@onready var Master_Bus = AudioServer.get_bus_index("Master")
+@onready var MusicVolume = AudioServer.get_bus_index("Music")
+
 
 
 func _ready() -> void:
 	scrollbar.connect("changed", on_scroll)
 	parser.connect("response_generated", on_response_generated)
 	parser.connect("clear_responses_generated", on_clear_responses_generated)
-	parser.initialize(location_manager.get_child(0))
+	parser.initialize(location_manager.get_child(0), player)
 	input.grab_focus()
 
 
@@ -67,3 +71,11 @@ func focus_controller():
 	if Global.input_focus_regrab:
 		input.grab_focus()
 		Global.input_focus_regrab = false
+		
+
+func _on_master_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(Master_Bus, linear_to_db(value))
+	
+	
+func _on_music_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(MusicVolume, linear_to_db(value))

@@ -4,10 +4,12 @@ signal response_generated(response_text)
 signal clear_responses_generated
 
 var current_location = null
+var player = null
 
 @onready var terminal_access = $"../CanvasLayer/TerminalPanel"
 
-func initialize(starting_location):
+func initialize(starting_location, player):
+	self.player = player
 	change_location(starting_location)
 
 
@@ -27,13 +29,15 @@ func process_command(input:String) -> String:
 		"help":
 			return help()
 		"take":
-			return take()
+			return take(second_word)
 		"look":
 			return look(second_word)
 		"interact":
 			return interact(second_word)
 		"inventory":
 			return view_inventory()
+		"drop":
+			return drop_item(second_word)
 		"clear":
 			return clear_commands()
 		_:
@@ -59,7 +63,7 @@ func go(second_word) -> String:
 func look(second_word) -> String:
 	if second_word == "":
 		return "Look at what?"
-	elif second_word == "pockets":
+	elif second_word == "storage":
 		return view_inventory()
 	elif second_word == "bench":
 		return $"../LocationManager/Bench".location_description
@@ -109,15 +113,50 @@ func interact(second_word):
 	return "You can't do that."
 
 
-func take():
-	return "soon"
+func take(second_word):
+	if second_word == "":
+		return "Take what?"
+	
+	for item in current_location.items:
+		if second_word.to_lower() == item.item_name.to_lower():
+			player.take_item(item)
+			current_location.remove_items(item)
+			return "You TAKE the " + item.item_name
+			
+	if second_word == "all":
+		for item in current_location.items.duplicate():
+			player.take_item(item)
+			current_location.remove_items(item)
+		return "You TAKE all the items."
+			
+	return "There is nothing like that here for you to TAKE."
+	
 
-func view_inventory():
-	return "You check, and find your pockets empty."
+func drop_item(second_word):
+	if second_word == "":
+		return "DROP what?"
+	
+	for item in player.inventory:
+		if second_word.to_lower() == item.item_name.to_lower():
+			player.drop_item(item)
+			current_location.add_items(item)
+			return "You DROP the " + item.item_name
+			
+	if second_word == "all":
+		for item in player.inventory.duplicate():
+			player.drop_item(item)
+			current_location.add_items(item)
+		return "You DROP all your items."
+			
+	return "There is nothing like that for you to DROP."
+
+
+func view_inventory() -> String:
+	return player.get_inventory()
 
 
 func help():
-	return "Valid commands are: GO, LOOK, INTERACT, TAKE, HELP, CLEAR. Objects in BOLD are interactible. INVENTORY to open inventory, or LOOK POCKETS. LOOK SELF to examine yourself. [Alt] to open character panel."
+	return "Valid commands are: GO, LOOK, INTERACT, TAKE, DROP, HELP, CLEAR. Objects in BOLD are interactible. INVENTORY to open inventory, or LOOK STORAGE. LOOK SELF to examine yourself. [ALT] to open character panel. [ESC] to open the audio options panel."
 
 
 func clear_commands():
@@ -129,11 +168,5 @@ func clear_commands():
 func change_location(new_location):
 	print("received command")
 	current_location = new_location
-	var exits = PackedStringArray(new_location.exits.keys())
-	var strings = "\n".join(PackedStringArray([
-		"Location: " + new_location.location_name,
-		new_location.location_description,
-		"Available locations: " + ", ".join(exits)
-	]))
+	var strings = new_location.get_full_desc_string()
 	response_generated.emit(strings)
-	print("change location test passed")

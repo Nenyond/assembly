@@ -45,7 +45,6 @@ layout_mode = 2
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 20
@@ -58,11 +57,11 @@ text = "Master Volume"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-step = 0.5
-value = 100.0
+max_value = 1.0
+step = 0.05
+value = 1.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 20
 
@@ -74,10 +73,12 @@ text = "Music Volume"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-value = 100.0
-rounded = true
+max_value = 1.0
+step = 0.05
+value = 1.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_fnxmf")
 theme_override_font_sizes/font_size = 32
@@ -90,6 +91,12 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Music is \"Dark Fallout\" by remaxim licensed CC-BY-SA 3.0"
+horizontal_alignment = 1
 
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer2/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]

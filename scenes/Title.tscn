@@ -69,7 +69,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Assembly_  is a text based adventure demo built for the Godot Jam #3. It is an hoamge to the many hours I spent playing classic text based games like Zork. "
+text = "Assembly_  is a text based adventure demo built for the Godot Jam #3. It is an homage to the many hours I spent playing classic text based games like Zork. "
 autowrap_mode = 2
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
@@ -87,7 +87,7 @@ text = "You'll enter commands in the text input area at the bottom, and the game
 autowrap_mode = 2
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -100,16 +100,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Start Game"
 
-[node name="CreditsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "View Credits"
-
 [node name="GitHubButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "View Code in Github"
 
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Music: \"Dark Fallout\" by remaxim licensed CC-BY-SA 3.0.  Fonts: DOTO-Variable and SpaceGrotesk-variable from fonts.google.com. "
+autowrap_mode = 2
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/GitHubButton" to="." method="_on_git_hub_button_pressed"]

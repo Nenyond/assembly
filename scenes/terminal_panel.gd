@@ -73,8 +73,7 @@ func terminal_commands(input: String):
 		"verify":
 			return "According to the system, your name is: " + GlobalPlayerData.player_name
 		"activate":
-			GlobalPlayerData.machinery_activated = true
-			return "The MACHINERY is now active."
+			return activate_machinery(second_word)
 		"manipulator":
 			if GlobalPlayerData.machinery_activated:
 				return activate_manipulator(second_word, third_word)
@@ -103,6 +102,16 @@ func clear_terminal():
 	for i in range(entries_to_remove):
 		game_area.get_child(i).queue_free()
 	return ""
+
+
+func activate_machinery(second_word):
+	if second_word == "":
+		return "Error: Command requires a parameter. Activate what?"
+	elif second_word == "machinery":
+		GlobalPlayerData.machinery_activated = true
+		return "The MACHINERY has been ACTIVATED."
+	else:
+		return "Error: unknown command, action aborted."
 
 
 func activate_manipulator(second_word, third_word):
